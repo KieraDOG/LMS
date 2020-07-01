@@ -1,19 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
+import Flex from '../../../Flex';
+import Text from '../../../Text';
 
-const Wrapper = styled.footer`
-  font-size: ${(props) => props.theme.typography.size.sm};
-  text-align: center;
-  color: ${(props) => props.theme.typography.color.info};
-  border-top: ${(props) => props.theme.border.default};
-  padding-top: ${(props) => props.theme.gutter.sm};
-`;
-
-
-const Footer = ({ className }) => (
-  <Wrapper className={className}>
-    Made with Coffee & Love
-  </Wrapper>
+const Footer = (props) => (
+  <Flex
+    {...props}
+    justifyContent="center"
+    borderTop="default"
+    pt="sm"
+  >
+    <Text 
+      fontSize="sm" 
+      color="grey"
+    >
+      Made with Coffee & Love
+    </Text>
+  </Flex>
 );
 
 export default Footer;

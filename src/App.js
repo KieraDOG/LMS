@@ -1,7 +1,7 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import theme from './theme';
+import { ThemeProvider as SSThemeProvider, ThemeProvider } from 'styled-components';
 import Layout from './components/Layout';
+import theme, { ssTheme } from './theme';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,9 +15,11 @@ class App extends React.Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <Layout>
-          APP
-        </Layout>
+        <SSThemeProvider theme={ssTheme}>
+          <Layout>
+            APP
+          </Layout>
+        </SSThemeProvider>
       </ThemeProvider>
     );
   }
