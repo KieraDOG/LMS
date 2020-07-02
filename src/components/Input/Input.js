@@ -11,6 +11,8 @@ const Label = styled.label`
 `;
 
 const TextField = styled.input`
+  -webkit-appearance: none;
+
   ${space}
   ${typography}
   ${layout}
