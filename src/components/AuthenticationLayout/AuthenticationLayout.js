@@ -8,13 +8,14 @@ const AuthenticationLayout = ({
     minWidth="100vw"
     minHeight="100vh"
     backgroundColor="lightGrey"
-    alignItems="center"
+    alignItems={['flex-start', null, "center"]}
     justifyContent="center"
   >
     <Flex
-      m="lg"
+      my={[null, null, 'lg']}
       backgroundColor="white"
-      borderRadius="md"
+      borderRadius={[null, null, 'md']}
+      flexDirection={['column', null, 'row']}
     >
       {children}
     </Flex>

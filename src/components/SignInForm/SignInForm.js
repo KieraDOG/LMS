@@ -45,8 +45,8 @@ class SignInForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <Box mb="md">
-          <Input 
-            width="300px"
+          <Input
+            width="100%" 
             id="email"
             label="Email" 
             value={email}
@@ -54,8 +54,8 @@ class SignInForm extends React.Component {
           />
         </Box>
         <Box mb="sm">
-          <Input 
-            width="300px"
+          <Input
+            width="100%" 
             type="password"
             id="password" 
             label="Password" 
@@ -70,7 +70,7 @@ class SignInForm extends React.Component {
         </Flex>
         <Flex justifyContent="center">
           <Button 
-            width="200px" 
+            width="80%" 
             outline 
             variant="primary"
             type="submit"

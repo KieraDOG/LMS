@@ -16,15 +16,17 @@ const SignIn = ({
   <AuthenticationLayout>
     <Flex 
       color="white"
+      order={[1, null, -1]}
       backgroundColor="primary"
-      px="xxl"
+      px={['md', null, 'xxl']}
+      py="lg"
       alignItems="center"
-      borderTopLeftRadius="md"
-      borderBottomLeftRadius="md"
-      maxWidth="450px"
+      borderTopLeftRadius={[null, null, 'md']}
+      borderBottomLeftRadius={[null, null, 'md']}
+      width={['100%', null, '450px']}
     >
       <Box>
-        <Box mb="md">
+        <Box mb="md" display={['none', null, 'block']}>
           <Text fontSize="xxl" fontWeight="light">Hello Friend!</Text>
         </Box>
         <Box mb="md">
@@ -39,14 +41,15 @@ const SignIn = ({
     </Flex>
     <Box
       py="xxl"
-      px="xl"
-      borderTopRightRadius="md"
-      borderBottomRightRadius="md"
+      px={['md', null, 'xl']}
+      width={['100%', null, '350px']}
     >
       <Flex justifyContent="center" mb="md">
         <Text color="primary" fontSize="xxl" fontWeight="light">Sign in</Text>
       </Flex>
-      <SignInForm loading={loading} onSubmit={handleSignIn} />
+      <Box>
+        <SignInForm loading={loading} onSubmit={handleSignIn} />
+      </Box>
     </Box>
   </AuthenticationLayout>
 );

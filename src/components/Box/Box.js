@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { border, color, layout, position, space, typography } from 'styled-system';
+import { border, color, layout, position, space, typography, flexbox } from 'styled-system';
 
 export default styled.div`
   ${layout}
@@ -8,4 +8,5 @@ export default styled.div`
   ${color}
   ${border}
   ${typography}
+  ${flexbox}
 `;
