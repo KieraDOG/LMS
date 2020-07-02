@@ -5,7 +5,7 @@ import SignUp from '../../pages/SignUp';
 import User from '../User';
 
 const Root = () => (
-  <Router>
+  <Router  basename="/lms">
     <Switch>
       <Route path="/sign-in" exact>
         <SignIn />
