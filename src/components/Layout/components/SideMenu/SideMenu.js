@@ -9,7 +9,7 @@ const SideMenu = ({
   <Box 
     {...props}
     color="white" 
-    backgroundColor="bgSecondary" 
+    backgroundColor="mineShaftBlack" 
     minHeight="100vh"
   >
     {title}

@@ -1,93 +1,70 @@
+import { faChalkboardTeacher, faSchool, faStickyNote, faTachometerAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { darken } from 'polished';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStickyNote, faChalkboardTeacher, faSchool, faUser } from '@fortawesome/free-solid-svg-icons';
-import { display, textAlign } from 'styled-system';
+import { display } from 'styled-system';
+import Link from '../../../../../Link';
 
 const ITEMS = [{
-  name: 'course',
-  text: 'Course',
+  name: 'dashboard',
+  text: 'Dashboard',
+  icon: faTachometerAlt,
+  path: '/'
+}, {
+  name: 'courses',
+  text: 'Courses',
   icon: faSchool,
 }, {
-  name: 'assignment',
-  text: 'Assignment',
+  name: 'assignments',
+  text: 'Assignments',
   icon: faStickyNote,
 }, {
-  name: 'teacher',
-  text: 'Teacher',
+  name: 'teachers',
+  text: 'Teachers',
   icon: faChalkboardTeacher,
   active: true,
 }, {
-  name: 'student',
-  text: 'Student',
+  name: 'students',
+  text: 'Students',
   icon: faUser,
 }];
 
-const color = (props) => {
-  if (!props.color) {
+const width = (props) => {
+  if (!props.width) {
     return '';
   }
 
-  const { theme } = props;
-  const obj = theme.color;
-
   return css`
-    color: ${obj[props.color]};
+    width: ${props.width};
   `;
 }
 
-const fontSize = (props) => {
-  if (!props.fontSize) {
-    return '';
-  }
-
-  const { theme } = props;
-  const obj = theme.typography.size;
-
-  return css`
-    font-size: ${obj[props.fontSize]};
-  `;
-}
-
-const fontWeight = (props) => {
-  if (!props.fontWeight) {
-    return '';
-  }
-
-  const { theme } = props;
-  const obj = theme.typography.weight;
-
-  return css`
-    font-weight: ${obj[props.fontWeight]};
-  `;
-}
-
-const padding = (props) => {
+const margin = (props) => {
   const { theme } = props;
   const obj = theme.gutter;
 
   const styles = [{
-    key: 'p',
-    properties: ['padding'],
+    key: 'm',
+    properties: ['margin'],
   }, {
-    key: 'px',
-    properties: ['padding-right', 'padding-left'],
+    key: 'mx',
+    properties: ['margin-right', 'margin-left'],
   }, {
-    key: 'py',
-    properties: ['padding-top', 'padding-bottom'],
+    key: 'my',
+    properties: ['margin-top', 'margin-bottom'],
   }, {
-    key: 'pt',
-    properties: ['padding-top'],
+    key: 'mt',
+    properties: ['margin-top'],
   }, {
-    key: 'pr',
-    properties: ['padding-right'],
+    key: 'mr',
+    properties: ['margin-right'],
   }, {
-    key: 'pb',
-    properties: ['padding-bottom'],
+    key: 'mb',
+    properties: ['margin-bottom'],
   }, {
-    key: 'pl',
-    properties: ['padding-left'],
+    key: 'ml',
+    properties: ['margin-left'],
   }];
 
   const string = styles
@@ -106,55 +83,53 @@ const padding = (props) => {
   `
 };
 
-const Wrapper = styled.nav`
+const Icon = styled.span`
+  ${display}
+  ${width}
 `;
 
-const Link = styled.a`
-  display: block;
-  text-decoration: none;
-  ${padding}
-  ${color}
-  ${fontWeight}
-  ${fontSize}
-  ${textAlign}
-  letter-spacing: 1px;
+const Text = styled.span`
+  ${display}
+  ${margin}
+`;
 
+const LinkItem = styled(Link)`
   &:hover {
     color: ${(props) => props.theme.color.white};
     background: ${(props) => darken(0.1, props.theme.backgroundColor.secondary)}
   }
 `;
 
-const Icon = styled.span`
-  display: inline-block;
-  width: 20px;
-`;
+const Navigation = ({
+  location,
+}) => (
+  <nav>
+    {ITEMS.map((i) => {
+      const to = i.path || `/${i.name}`
 
-const Text = styled.span`
-  ${display}
-  margin-left: ${(props) => props.theme.gutter.xs};
-`;
-
-const Navigation = () => (
-  <Wrapper>
-    {ITEMS.map((i) => (
-      <Link 
-        key={i.name} 
-        py="sm"
-        px="md"
-        color={i.active ? 'info' : 'white'}
-        fontWeight="bold"
-        fontSize="sm"
-        textAlign={['center', null, 'left']}
-        href="/" 
-      >
-        <Icon>
-          <FontAwesomeIcon icon={i.icon} />
-        </Icon>
-        <Text display={['none', null, 'inline-block']}>{i.text}</Text>
-      </Link>
-    ))}
-  </Wrapper>
+      return (
+        <LinkItem
+          key={i.name}
+          display="block" 
+          py="sm"
+          px="md"
+          color="white"
+          activeColor="info"
+          fontWeight="bold"
+          fontSize="sm"
+          textAlign={['center', null, 'left']}
+          to={to}
+        >
+          <Icon display="inline-block" width="20px">
+            <FontAwesomeIcon icon={i.icon} />
+          </Icon>
+          <Text display={['none', null, 'inline-block']} ml="sm">
+            {i.text}
+          </Text>
+        </LinkItem>
+      )
+    })}
+  </nav>
 );
 
 export default Navigation;

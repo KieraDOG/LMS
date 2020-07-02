@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { darken } from 'polished';
-import Flex from '../../../Flex';
+import logout from '../../../../store/authentication/actions/logout';
 import Box from '../../../Box';
+import Button from '../../../Button';
+import Flex from '../../../Flex';
+import Text from '../../../Text';
 
 const getTheme = (path) => (props)  => path
   .split('.')
@@ -16,27 +19,11 @@ const Left = styled.div`
   margin-left: auto;
 `;
 
-const Button = styled.button`
-  outline: 0;
-  border: 0;
-  background: transparent;
-  font-size: ${getTheme('typography.size.md')};
-  background-color: ${getTheme('color.primary')};
-  color: ${getTheme('color.white')};
-  padding-top: ${getTheme('gutter.xs')};
-  padding-right: ${getTheme('gutter.sm')};
-  padding-bottom: ${getTheme('gutter.xs')};
-  padding-left: ${getTheme('gutter.sm')};
-  border-radius: ${getTheme('borderRadius.sm')};
-  cursor: pointer;
-  letter-spacing: 1px;
-
-  &:hover {
-    background-color: ${(props) => darken(0.1, getTheme('color.primary')(props))};
-  }
-`;
-
-const Header = (props) => (
+const Header = ({
+  onLogout,
+  user,
+  ...props
+}) => (
   <Box 
     {...props}
     backgroundColor="white"
@@ -44,10 +31,23 @@ const Header = (props) => (
   >
     <Flex>
       <Left>
-        <Button>Logout</Button>
+        {user && (
+          <Flex alignItems="center">
+            <Text color="grey">{user.email}</Text>
+            <Button variant="error" ml="sm" onClick={onLogout}>Logout</Button>
+          </Flex>
+        )}
       </Left>
     </Flex>
   </Box>
 );
 
-export default Header;
+const mapStateToProps = (state) => ({
+  user: state.authentication.data, 
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLogout: () => dispatch(logout()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

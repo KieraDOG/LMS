@@ -1,28 +1,30 @@
 import React from 'react';
-import { ThemeProvider as SSThemeProvider, ThemeProvider } from 'styled-components';
-import Layout from './components/Layout';
-import theme, { ssTheme } from './theme';
+import { 
+  ThemeProvider as SSThemeProvider,
+  ThemeProvider as SCThemeProvider,
+} from 'styled-components';
+import { Provider as ReduxProvider } from 'react-redux';
+import Root from './routes/Root';
+import scTheme, { ssTheme } from './theme';
+import store from './store';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const ThemeProvider = ({
+  children,
+}) => (
+  <SCThemeProvider theme={scTheme}>
+    <SSThemeProvider theme={ssTheme}>
+      {children}
+    </SSThemeProvider>
+  </SCThemeProvider>
+);
 
-    this.state = {
-      authenticated: null,
-    };
-  }
+const App = () => (
+  <ReduxProvider store={store}>
+    <ThemeProvider>
+      <Root />
+    </ThemeProvider>
+  </ReduxProvider>
+);
 
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <SSThemeProvider theme={ssTheme}>
-          <Layout>
-            APP
-          </Layout>
-        </SSThemeProvider>
-      </ThemeProvider>
-    );
-  }
-}
 
 export default App;
