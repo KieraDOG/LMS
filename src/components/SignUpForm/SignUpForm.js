@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { isEmail, isEmpty } from 'validator';
+import { isEmail, isEmpty, isLength } from 'validator';
 import validate from '../../helpers/validate';
 import Box from '../Box';
 import Button from '../Button';
 import Flex from '../Flex';
 import Input from '../Input';
 
-class SignInForm extends React.Component {
+class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,6 +16,7 @@ class SignInForm extends React.Component {
       data: {
         email: '',
         password: '',
+        confirmPassword: '',
       },
       error: {},
     };
@@ -27,6 +28,16 @@ class SignInForm extends React.Component {
       ],
       password: [
         [isEmpty, 'Please enter you password'],
+        [(v) => !isLength(v, { min: 8 }), 'Password must be at least 8 characters']
+      ],
+      confirmPassword: [
+        [isEmpty, 'Please enter you confirm password'],
+        [(v) => {
+          const { data } = this.state;
+
+          const { password } = data;
+          return password !== v;
+        }, 'Please confirm your password'],
       ],
     };
 
@@ -95,11 +106,12 @@ class SignInForm extends React.Component {
     const { onSubmit } = this.props;
     const { data } = this.state;
 
-    const { email, password } = data;
+    const { email, password, confirmPassword } = data;
 
     onSubmit({
       email,
       password,
+      confirmPassword,
     });
   }
 
@@ -119,7 +131,7 @@ class SignInForm extends React.Component {
             onChange={this.handleValueChange('email')}
           />
         </Box>
-        <Box mb="lg">
+        <Box mb="sm">
           <Input
             width="100%" 
             type="password"
@@ -130,6 +142,17 @@ class SignInForm extends React.Component {
             onChange={this.handleValueChange('password')}
           />
         </Box>
+        <Box mb="lg">
+          <Input
+            width="100%" 
+            type="password"
+            id="confirmPassword" 
+            label="Confirm password" 
+            value={data.confirmPassword}
+            error={dirty ? error.confirmPassword : ''}
+            onChange={this.handleValueChange('confirmPassword')}
+          />
+        </Box>
         <Flex justifyContent="center">
           <Button 
             width="80%" 
@@ -138,7 +161,7 @@ class SignInForm extends React.Component {
             type="submit"
             disabled={loading}
           >
-            {loading ? '...' : 'Sign In'}
+            {loading ? '...' : 'Sign Up'}
           </Button>
         </Flex>
       </form>
@@ -146,12 +169,12 @@ class SignInForm extends React.Component {
   }
 }
 
-SignInForm.defaultProps = {
+SignUpForm.defaultProps = {
   loading: false,
 };
 
-SignInForm.propTypes =  {
+SignUpForm.propTypes =  {
   loading: PropTypes.bool,
 };
 
-export default SignInForm;
+export default SignUpForm;

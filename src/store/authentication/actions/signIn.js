@@ -1,5 +1,5 @@
-import { SIGN_IN_SUCCESSFUL, REQUEST_SIGN_IN } from "../type";
 import signIn from "../../../apis/signIn";
+import { REQUEST_SIGN_IN, SIGN_IN_SUCCESSFUL } from "../type";
 
 export default (data) => async (dispatch) => {
   dispatch({

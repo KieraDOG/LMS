@@ -1,7 +1,3 @@
-export default (data) => new Promise((resolve) => {
-  setTimeout(() => {
-    resolve({
-      email: data.email,
-    })
-  }, 1000);
-});
+import API from  '../API';
+
+export default (data) => API.post('/authentication/sign-up', data);

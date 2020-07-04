@@ -62,7 +62,7 @@ const colors = {
 export const ssTheme = {
   colors,
   borders: {
-    default: `1px solid ${colors.border}`,
+    default: `1px solid`,
   },
   space: {
     xxs: '6px',

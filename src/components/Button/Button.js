@@ -75,6 +75,10 @@ const outlineVariant = {
   }
 }
 
+const disabledStyle = css`
+  cursor: not-allowed;
+`;
+
 const styles = css`
   outline: 0;
   border: 0;
@@ -91,6 +95,10 @@ const styles = css`
   ${border}
   ${layout}
   ${(props) => variant(props.outline ? outlineVariant : defaultVariant)(props)}
+
+  &:disabled {
+    ${disabledStyle}
+  }
 `;
 
 const BaseButton = styled.button`
