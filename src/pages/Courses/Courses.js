@@ -1,7 +1,13 @@
 import React from 'react';
+import getAuthentication from '../../apis/getAuthentication';
 
-const Courses = () => (
-  <div>Courses</div>
-);
+const Courses = () => {
+  getAuthentication();
+
+  return (
+    <div>Courses</div>
+  );
+}
+
 
 export default Courses;

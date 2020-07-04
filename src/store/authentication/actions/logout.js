@@ -1,5 +1,9 @@
 import { LOG_OUT_SUCCESSFUL } from "../type";
 
-export default () => ({
-  type: LOG_OUT_SUCCESSFUL,
-});
+export default () => {
+  localStorage.removeItem('authorization');
+
+  return {
+    type: LOG_OUT_SUCCESSFUL,
+  };
+};

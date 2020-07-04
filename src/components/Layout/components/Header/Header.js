@@ -20,7 +20,7 @@ const Left = styled.div`
 `;
 
 const Header = ({
-  onLogout,
+  handleLogout,
   user,
   ...props
 }) => (
@@ -34,7 +34,7 @@ const Header = ({
         {user && (
           <Flex alignItems="center">
             <Text color="grey">{user.email}</Text>
-            <Button variant="error" ml="sm" onClick={onLogout}>Logout</Button>
+            <Button variant="error" ml="sm" onClick={handleLogout}>Logout</Button>
           </Flex>
         )}
       </Left>
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLogout: () => dispatch(logout()),
+  handleLogout: () => dispatch(logout()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

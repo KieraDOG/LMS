@@ -7,6 +7,9 @@ import { Provider as ReduxProvider } from 'react-redux';
 import Root from './routes/Root';
 import scTheme, { ssTheme } from './theme';
 import store from './store';
+import { setInterceptors } from './apis/API';
+
+setInterceptors(store);
 
 const ThemeProvider = ({
   children,
